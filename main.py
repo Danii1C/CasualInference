@@ -25,15 +25,11 @@ model.fit(data)
 # Выполнение выводов на основе заданных значений переменных
 infer = VariableElimination(model)
 
-query = infer.query(variables=['disease'], evidence={'smoking': 0, 'air_pollution': 2})
+query = infer.query(variables=['disease'], evidence={'smoking': 1, 'air_pollution': 3})
 # Список значений
 state_names_D = model.get_cpds('disease').state_names['disease']
 query_table = list(zip(state_names_D, list(query.values)))
 headers = ["disease", "Условная вероятность"]
 print(tabulate(query_table, headers=headers, tablefmt="grid"))
-
-# is_dependent = model.is_dconnected('age', 'gender',  observed='smoking')
-# print(is_dependent)
-# print(model.active_trail_nodes(['age', 'gender'], observed='smoking'))
 
 
